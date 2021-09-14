@@ -1,0 +1,261 @@
+* {
+    padding:0;
+    margin:0;
+}
+
+body::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #E7E7E7;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+}
+
+button, input {
+    outline:none;
+    border:none;
+    background:white;
+    border-radius: 0;
+}
+
+.App{
+    height: 100vh;
+    width: 100%;
+}
+
+body {
+
+    height : 100vh;
+    width: 100%;
+    background: #E7E7E7;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+
+}
+
+.redactor-shadow-element {
+
+    -webkit-box-shadow: 0 0 0.5vw 0 rgba(34, 60, 80, 0.3);
+    -moz-box-shadow: 0 0 0.5vw 0 rgba(34, 60, 80, 0.3);
+    box-shadow: 0 0 0.5vw 0 rgba(34, 60, 80, 0.3);
+
+}
+
+.top-bar{
+    z-index:100;
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+    padding: 1vw 0;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    height: 8vh;
+    width: calc(100vw - 4vh);
+}
+
+.burger{
+    height: 4vh;
+    width: 4vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:none;
+}
+
+.doc-title{
+    height: 4vh;
+    padding-left:0.5rem;
+    padding-right:0.5rem;
+    margin-left:2vh;
+    width:auto;
+}
+
+#content-area{
+
+    width: calc(100vw - 4vh);
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    margin-top:6vh;
+
+}
+
+.editor {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.ck.ck-balloon-panel[class*=arrow_s]:before {
+    filter: none !important;
+}
+
+.ck-balloon-panel {
+    border-radius: 0 !important;
+}
+
+.ck.ck-balloon-panel[class*=arrow_s]:before, .ck-balloon-panel {
+    border: none !important;
+    background: white !important;
+    -webkit-box-shadow: 0 0 0.5vw 0 rgba(34, 60, 80, 0.3) !important;
+    -moz-box-shadow: 0 0 0.5vw 0 rgba(34, 60, 80, 0.3) !important;
+    box-shadow: 0 0 0.5vw 0 rgba(34, 60, 80, 0.3) !important;
+}
+
+.b {
+
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    background:white;
+    position: relative;
+    margin-top:2vh;
+
+}
+
+.b-fav{
+    position:absolute;
+    top:0;
+    left:0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 1rem 1rem 0 0;
+    display:none;
+}
+
+.b-fav-starred{
+    border-color: #f9e79f transparent transparent transparent;
+    display:block;
+}
+
+.v-label{
+    color: grey;
+    position: absolute;
+    text-align:center;
+    width:50%;
+    top:0.5%;
+    left:25%;
+}
+
+.b-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh;
+    height: 4vh;
+    box-sizing: border-box;
+}
+
+.b-label, .v-arrows, .b-menu-wrapper{
+    width: calc(100%/3);
+}
+
+.v-arrows{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.v-arrow{
+    height: 1rem;
+    width: 1rem;
+}
+
+.v-left, .v-right{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.v-page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: consolas, serif;
+    padding: 0 0.5vw 0 0.5vw;
+}
+
+.btn-icon{
+    fill:grey;
+}
+
+.btn-icon:hover{
+    fill:black;
+}
+
+.b-label, .v-label{
+    background: none;
+}
+
+.b-menu-wrapper{
+    padding-right:1.5vh;
+    box-sizing:border-box;
+}
+
+.b-menu{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    overflow:hidden;
+    height: 3vh;
+}
+
+.b-menu-nav{
+    transition:0.2s;
+    transform-origin: right center;
+    transform: translate(100%);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.b-menu-nav-active{
+    transform: translate(0%);
+}
+
+.b-menu-nav-option{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin: 1% 1.5vh 1% 1%;
+    background:white;
+    color:grey;
+}
+
+.b-menu-nav-option:first-child{
+    margin-left:1.5vh
+}
+
+.b-menu-nav-option:hover{
+    color:black;
+}
+
+.b-menu-btn{
+    z-index:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#add-block-button{
+    margin-top:2vh;
+    font-family: consolas, serif;
+    font-size: 300%;
+    margin-bottom: 30vh;
+    color:black;
+    background:white;
+    border-radius:50%;
+    height:50px;
+    width:50px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
