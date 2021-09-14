@@ -5,11 +5,10 @@ import './editor.css'
 function App() {
   return (
     <div className="App">
-        <Top />
+        {Top("My first App")}
         <ContentArea/>
     </div>
   );
 }
-
 
 export default App;
