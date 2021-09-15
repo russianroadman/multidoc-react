@@ -35,10 +35,32 @@ export default function Top(documentTitle){
                             delete
                         </div>
                     </div>
-                    <div className="side-menu-message">
-                        recent
+                    <div className="side-menu-option-list-history">
+                        <div className="side-menu-option">
+                            My document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            My document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            My document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            My document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
                     </div>
-                    <div className="side-menu-option-list"></div>
                 </div>
             </div>
         </>

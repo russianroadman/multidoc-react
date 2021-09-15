@@ -10,6 +10,12 @@ export default function Block(blockTitle, versionTitle, pages, page){
         setEditorContextMenuActive(!editorContextMenuActive)
     }
 
+    const checkToggled = () => {
+        if (editorContextMenuActive){
+            toggleEditorContextMenuActive()
+        }
+    }
+
     return(<div className="b redactor-shadow-element">
         <div className="b-fav b-fav-starred"></div>
         <input className="v-label" placeholder="Created by..." defaultValue={versionTitle}/>
@@ -53,7 +59,7 @@ export default function Block(blockTitle, versionTitle, pages, page){
                     </div>
                     <button
                         className="b-menu-btn"
-                        onBlur={toggleEditorContextMenuActive}
+                        onBlur={checkToggled}
                         onClick={toggleEditorContextMenuActive}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" className="btn-icon" width="3vh"
