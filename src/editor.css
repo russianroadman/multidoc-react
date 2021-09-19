@@ -341,7 +341,7 @@ body {
 }
 
 .side-menu-option-list-history > .side-menu-option:last-child{
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .side-menu-option-list-history::-webkit-scrollbar {
@@ -433,20 +433,11 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 0.25rem;
-    /*background: darkgray;*/
     border: 1px solid darkgray;
 }
 
-.side-menu-option-share{
-    /*background: #27ae60;*/
-}
-
-.side-menu-option-export{
-    /*background: #16a085;*/
-}
-
-.side-menu-option-delete{
-    /*background: #c0392b;*/
+.side-menu-option-share:hover, .side-menu-option-export:hover, .side-menu-option-delete:hover, .side-menu-option-find:hover{
+    border: 1px solid gray;
 }
 
 .side-menu-message{

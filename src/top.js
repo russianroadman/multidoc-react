@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import './editor.css'
-import SidebarFind from "./sidebar-find";
-import SidebarActions from "./sidebar-actions";
+import Sidebar from "./sidebar";
 
 export default function Top(documentTitle){
 
@@ -21,61 +20,7 @@ export default function Top(documentTitle){
                 </button>
                 <input placeholder="Document title" type="text" className="doc-title redactor-shadow-element" defaultValue={documentTitle}/>
             </div>
-            <div className={toggled ? 'side-menu-wrapper side-menu-wrapper-active' : 'side-menu-wrapper'}>
-                <div className="side-menu">
-                    <div className="side-menu-option-list">
-                        <SidebarFind />
-                        <SidebarActions />
-                    </div>
-                    <div className="side-menu-option-list-history">
-                        <div className="side-menu-option">
-                            My document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            My document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            My document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            My document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                        <div className="side-menu-option">
-                            Another document
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {Sidebar(toggled)}
         </>
     )
 }
