@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import './editor.css'
+import SidebarFind from "./sidebar-find";
+import SidebarActions from "./sidebar-actions";
 
 export default function Top(documentTitle){
 
@@ -22,18 +24,8 @@ export default function Top(documentTitle){
             <div className={toggled ? 'side-menu-wrapper side-menu-wrapper-active' : 'side-menu-wrapper'}>
                 <div className="side-menu">
                     <div className="side-menu-option-list">
-                        <div className="side-menu-option">
-                            find
-                        </div>
-                        <div className="side-menu-option">
-                            share
-                        </div>
-                        <div className="side-menu-option">
-                            export
-                        </div>
-                        <div className="side-menu-option">
-                            delete
-                        </div>
+                        <SidebarFind />
+                        <SidebarActions />
                     </div>
                     <div className="side-menu-option-list-history">
                         <div className="side-menu-option">
@@ -56,6 +48,27 @@ export default function Top(documentTitle){
                         </div>
                         <div className="side-menu-option">
                             My document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
+                        </div>
+                        <div className="side-menu-option">
+                            Another document
                         </div>
                         <div className="side-menu-option">
                             Another document

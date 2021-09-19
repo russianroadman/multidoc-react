@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './editor.css'
 import Ck from "./ck";
 
-export default function Block(blockTitle, versionTitle, pages, page){
+export default function Block(blockTitle, versionTitle, pages, page, content){
 
     const [editorContextMenuActive, setEditorContextMenuActive] = useState(false);
 
@@ -19,7 +19,7 @@ export default function Block(blockTitle, versionTitle, pages, page){
     return(<div className="b redactor-shadow-element">
         <div className="b-fav b-fav-starred"></div>
         <input className="v-label" placeholder="Created by..." defaultValue={versionTitle}/>
-        <Ck />
+        {Ck(content)}
         <div className="b-bottom">
             <input className="b-label" placeholder="Block title" defaultValue={blockTitle}/>
             <div className="v-arrows">

@@ -1,14 +1,16 @@
 import React from "react";
 import Block from "./block";
-
+import {document} from "./document";
 
 export default function ContentArea() {
 
     const blocks = [];
 
-    for (let i = 0; i < 3; i++) {
-        blocks.push(Block('block', 'version', 13, 7))
-    };
+    document.blocks.forEach(b => {
+        blocks.push(
+            Block(b.title, b.versions[0].author, b.versions.length, 1, b.versions[0].content.content)
+        )
+    })
 
     return(
         <div id="content-area">{blocks}</div>

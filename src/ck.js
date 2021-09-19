@@ -1,12 +1,12 @@
+import React from 'react';
+import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
 
-
-export default function Ck(){
+export default function Ck(content){
     return(
         <CKEditor
             editor={ BalloonEditor }
-            data=''
+            data={content}
             config={ {
                 toolbar: [
                     'fontFamily',
