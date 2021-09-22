@@ -2,13 +2,20 @@ import React from "react";
 import Block from "./block";
 import {document} from "./document";
 
-export default function ContentArea() {
+export default function ContentArea(isAddVersionDialogHidden, setAddVersionDialogHidden) {
 
     const blocks = [];
 
     document.blocks.forEach(b => {
         blocks.push(
-            Block(b.title, b.versions[0].author, b.versions.length, 1, b.versions[0].content.content)
+            Block(
+                isAddVersionDialogHidden, setAddVersionDialogHidden,
+                b.title,
+                b.versions[0].author,
+                b.versions.length,
+                1,
+                b.versions[0].content.content
+            )
         )
     })
 

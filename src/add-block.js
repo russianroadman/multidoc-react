@@ -3,9 +3,7 @@ import React from "react";
 export default function AddBlock(isAddBlockDialogHidden, setAddBlockDialogHidden){
 
     const close = () => {
-        console.log('hidden : ', isAddBlockDialogHidden)
         setAddBlockDialogHidden(true)
-        console.log('hidden : ', isAddBlockDialogHidden)
     }
 
     const addBlock = () => {
@@ -18,7 +16,7 @@ export default function AddBlock(isAddBlockDialogHidden, setAddBlockDialogHidden
             <div className="add-block-label">
                 Create new block
                 <button onClick={close} className="add-block-close">
-                    X
+                    <svg width="1rem" height="1rem" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"/></svg>
                 </button>
             </div>
             <input placeholder="Block title" className="add-block-input" />

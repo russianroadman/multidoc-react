@@ -1,23 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 import './editor.css'
 import Ck from "./ck";
 
-export default function Block(blockTitle, versionTitle, pages, page, content){
+export default function Block(isAddVersionDialogHidden, setAddVersionDialogHidden, blockTitle, versionTitle, pages, page, content){
 
-    const [editorContextMenuActive, setEditorContextMenuActive] = useState(false);
-
-    const toggleEditorContextMenuActive = () => {
-        setEditorContextMenuActive(!editorContextMenuActive)
-    }
-
-    const checkToggled = () => {
-        if (editorContextMenuActive){
-            toggleEditorContextMenuActive()
-        }
+    const showNewVersion = () => {
+        if (isAddVersionDialogHidden) setAddVersionDialogHidden(false);
     }
 
     return(<div className="b redactor-shadow-element">
-        <div className="b-fav b-fav-starred"></div>
+        <div className="b-fav b-fav-starred"/>
         <input className="v-label" placeholder="Created by..." defaultValue={versionTitle}/>
         {Ck(content)}
         <div className="b-bottom">
@@ -37,37 +29,19 @@ export default function Block(blockTitle, versionTitle, pages, page, content){
                     </svg>
                 </div>
             </div>
-            <div className="b-menu-wrapper">
-                <div className="b-menu">
-                    <div className={editorContextMenuActive ? 'b-menu-nav b-menu-nav-active': 'b-menu-nav'}>
-                        <button className="b-menu-nav-option">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="btn-icon" width="2vh"
-                                 height="2vh" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                            </svg>
-                        </button>
-                        <button className="b-menu-nav-option">
-                            <span>add version</span>
-                        </button>
-                        <button className="b-menu-nav-option">
-                            <span>delete block</span>
-                        </button>
-                        <button className="b-menu-nav-option">
-                            <span>delete version</span>
-                        </button>
-                    </div>
-                    <button
-                        className="b-menu-btn"
-                        onBlur={checkToggled}
-                        onClick={toggleEditorContextMenuActive}
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="btn-icon" width="3vh"
-                             height="3vh" viewBox="0 0 24 24">
-                            <path
-                                d="M6 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm9 0c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm9 0c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z"/>
-                        </svg>
-                    </button>
+            <div className="b-dropdown">
+                <button className="b-dropdown-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="btn-icon" width="3vh"
+                         height="3vh" viewBox="0 0 24 24">
+                        <path
+                            d="M6 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm9 0c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm9 0c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z"/>
+                    </svg>
+                </button>
+                <div className="b-dropdown-menu redactor-shadow-element">
+                    <button className="b-dropdown-menu-option">Add version</button>
+                    <button className="b-dropdown-menu-option">Star version</button>
+                    <button className="b-dropdown-menu-option">Delete version</button>
+                    <button className="b-dropdown-menu-option">Delete block</button>
                 </div>
             </div>
         </div>

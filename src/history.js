@@ -1,7 +1,8 @@
 export var history = [];
 
 export const updateHistory = () => {
-    history = JSON.parse(localStorage.getItem('history'))
+    let storage = JSON.parse(localStorage.getItem('history'))
+    if (storage !== null) history = storage
 }
 
 updateHistory();

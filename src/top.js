@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import './editor.css'
 import Sidebar from "./sidebar";
 
-export default function Top(documentTitle){
+export default function Top(documentTitle, isShareDialogHidden, setShareDialogHidden){
 
     const [toggled, setToggled] = useState(false);
 
@@ -20,7 +20,7 @@ export default function Top(documentTitle){
                 </button>
                 <input placeholder="Document title" type="text" className="doc-title redactor-shadow-element" defaultValue={documentTitle}/>
             </div>
-            {Sidebar(toggled)}
+            {Sidebar(toggled, isShareDialogHidden, setShareDialogHidden)}
         </>
     )
 }
