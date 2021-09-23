@@ -290,18 +290,17 @@ body {
     z-index: 10;
     padding: 0.5rem;
     position: absolute;
-    top:2rem;
+    top:3vh;
     background: white;
-    opacity: 0;
-    display: none;
-    transform: translateY(-20%);
-    transition: 0.1s;
+    transform: translateY(-10%);
+    visibility: hidden;
+    transition: 0s;
 }
 
 .b-dropdown > .b-dropdown-button:focus + .b-dropdown-menu{
-    display: block;
+    visibility: visible;
+    transition: 0.15s;
     transform: translateY(0%);
-    opacity: 1;
 }
 
 .b-dropdown-menu-option{
@@ -475,18 +474,11 @@ body {
 }
 
 .side-menu-option{
-    /*background: rgba(138, 43, 226, 0.15);*/
-    /*color: gray;*/
     overflow: hidden;
-    /*color: white;*/
-    /*background: #afa8ff;*/
     background: white;
     border: 1px solid white;
     box-sizing: border-box;
     color: gray;
-    /*border: 0.25rem solid #cecbff;*/
-    /*border: 0.25rem solid white;*/
-    /*font-weight: bold;*/
 }
 
 .side-menu-option:hover{
@@ -630,6 +622,7 @@ body {
 /*}*/
 
 .copy-to-clipboard-message{
+    z-index: 100;
     position: fixed;
     background: #26de81;
     border-radius: 0.125rem;

@@ -10,11 +10,7 @@ export default function ContentArea(isAddVersionDialogHidden, setAddVersionDialo
         blocks.push(
             Block(
                 isAddVersionDialogHidden, setAddVersionDialogHidden,
-                b.title,
-                b.versions[0].author,
-                b.versions.length,
-                1,
-                b.versions[0].content.content
+                b
             )
         )
     })
