@@ -6,12 +6,15 @@ import AddBlockButton from "./add-block-button";
 import AddBlock from "./add-block";
 import AddVersion from "./add-version";
 import ShareDialog from "./share-dialog";
+import {getTest} from "./requests";
 
 function App() {
 
     const [isAddBlockDialogHidden, setAddBlockDialogHidden] = useState(true);
     const [isAddVersionDialogHidden, setAddVersionDialogHidden] = useState(true);
     const [isShareDialogHidden, setShareDialogHidden] = useState(true);
+
+    getTest()
 
     return (
         <div className="App">
