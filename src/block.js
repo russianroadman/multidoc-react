@@ -7,7 +7,7 @@ export default function Block(
 ){
 
     const [blockTitle, setBlockTitle] = useState(b.title)
-    const [versionTitle, setVersionTitle] = useState(b.versions[0].author)
+    const [versionTitle, setVersionTitle] = useState(b.versions[0].title)
     const [pages, setPages] = useState(b.versions.length)
     const [page, setPage] = useState(1)
     const [content, setContent] = useState(b.versions[0].content.content)
@@ -15,16 +15,23 @@ export default function Block(
 
     const goRight = () => {
         if (page < pages) {
-            setContent(b.versions[page].content.content)
-            setPage(page+1)
+            const t = b.versions[page];
+            switchBlockContent(t.title, page+1, t.content.content, t.preferred)
         }
     }
 
     const goLeft = () => {
         if (page > 1) {
-            setContent(b.versions[page-2].content.content)
-            setPage(page-1)
+            const t = b.versions[page-2];
+            switchBlockContent(t.title, page-1, t.content.content, t.preferred)
         }
+    }
+
+    const switchBlockContent = (versionTitle, page, content, isPreferred) => {
+        setVersionTitle(versionTitle)
+        setPage(page)
+        setContent(content)
+        setPreferred(isPreferred)
     }
 
     const showNewVersion = () => {
@@ -32,13 +39,27 @@ export default function Block(
         if (isAddVersionDialogHidden) setAddVersionDialogHidden(false);
     }
 
+    const updateVTitle = (value) => {
+        setVersionTitle(value)
+    }
+
+    const updateBTitle = (value) => {
+        setBlockTitle(value)
+    }
+
     return(
         <div className="b redactor-shadow-element">
             <div className={ isPreferred ? "b-fav b-fav-starred" : "b-fav" } />
-            <input className="v-label" placeholder="Created by..." defaultValue={versionTitle}/>
+            <input className="v-label"
+                   placeholder="Created by..."
+                   value={versionTitle}
+                   onChange={e => updateVTitle(e.target.value)}/>
             {Ck(content)}
             <div className="b-bottom">
-                <input className="b-label" placeholder="Block title" defaultValue={blockTitle}/>
+                <input className="b-label"
+                       placeholder="Block title"
+                       value={blockTitle}
+                       onChange={e => updateBTitle(e.target.value)}/>
                 <div className="v-arrows">
                     <button onClick={goLeft} className="v-left">
                         <svg xmlns="http://www.w3.org/2000/svg" className="btn-icon v-arrow"

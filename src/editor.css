@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela&display=swap');
 
+@media print {
+    .top-bar,
+    .side-menu-wrapper,
+    .add-block-button-wrapper,
+    .add-block,
+    .add-version,
+    .copy-to-clipboard-message,
+    .copy-to-clipboard-message-active,
+    .b-bottom,
+    .b-fav,
+    .v-label
+    {
+        display: none !important;
+    }
+
+    .redactor-shadow-element {
+        -webkit-box-shadow: none !important;;
+        -moz-box-shadow: none !important;;
+        box-shadow: none !important;
+    }
+
+}
+
 * {
     padding:0;
     margin:0;

@@ -5,9 +5,14 @@ import Sidebar from "./sidebar";
 export default function Top(documentTitle, isShareDialogHidden, setShareDialogHidden){
 
     const [toggled, setToggled] = useState(false);
+    const [docTitle, setDocTitle] = useState(documentTitle);
 
     const toggleMenu = () => {
         setToggled(!toggled)
+    }
+
+    const updateDTitle = (value) => {
+        setDocTitle(value)
     }
 
     return(
@@ -18,7 +23,11 @@ export default function Top(documentTitle, isShareDialogHidden, setShareDialogHi
                         <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/>
                     </svg>
                 </button>
-                <input placeholder="Document title" type="text" className="doc-title redactor-shadow-element" defaultValue={documentTitle}/>
+                <input placeholder="Document title"
+                       type="text"
+                       className="doc-title redactor-shadow-element"
+                       value={docTitle}
+                       onChange={e => updateDTitle(e.target.value)}/>
             </div>
             {Sidebar(toggled, isShareDialogHidden, setShareDialogHidden)}
         </>

@@ -17,7 +17,9 @@ export default function SidebarActions(isShareDialogHidden, setShareDialogHidden
     }
 
     const print = () => {
+        
         window.print()
+
     }
 
     return(
