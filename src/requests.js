@@ -16,5 +16,5 @@ const sendGetAjax = (url, callback) => {
 };
 
 export const getTest = () => {
-	sendGetAjax('http://localhost:8080/get', console.log)
+	sendGetAjax('http://localhost:8080/test', console.log)
 }
