@@ -2,7 +2,7 @@ import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 
-export default function Ck(content){
+export default function Ck({content}){
     return(
         <CKEditor
             editor={ BalloonEditor }

@@ -2,9 +2,7 @@ import React, {useState} from "react";
 import './editor.css'
 import Ck from "./ck";
 
-export default function Block(
-    isAddVersionDialogHidden, setAddVersionDialogHidden, b
-){
+export default function Block({ isAddVersionDialogHidden, setAddVersionDialogHidden, b }){
 
     const [blockTitle, setBlockTitle] = useState(b.title)
     const [versionTitle, setVersionTitle] = useState(b.versions[0].title)
@@ -27,11 +25,11 @@ export default function Block(
         }
     }
 
-    const switchBlockContent = (versionTitle, page, content, isPreferred) => {
-        setVersionTitle(versionTitle)
-        setPage(page)
-        setContent(content)
-        setPreferred(isPreferred)
+    const switchBlockContent = (versionTitle_, page_, content_, isPreferred_) => {
+        setVersionTitle(versionTitle_)
+        setPage(page_)
+        setContent(content_)
+        setPreferred(isPreferred_)
     }
 
     const showNewVersion = () => {
@@ -54,7 +52,7 @@ export default function Block(
                    placeholder="Created by..."
                    value={versionTitle}
                    onChange={e => updateVTitle(e.target.value)}/>
-            {Ck(content)}
+            <Ck content={content} />
             <div className="b-bottom">
                 <input className="b-label"
                        placeholder="Block title"
