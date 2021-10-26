@@ -1,6 +1,7 @@
-import './editor.css'
+import '../css/editor.css'
 import {BrowserRouter, Route} from 'react-router-dom';
 import Main from './Main';
+import Home from './Home'
 import { w3cwebsocket as Ws } from 'websocket'
 import {useEffect} from "react";
 
@@ -12,11 +13,11 @@ function App() {
         client.onopen = () => {
             console.log('client connected')
         }
-        if (client.readyState === 1){
+        if (client.readyState === WebSocket.OPEN){
             client.send(
                 JSON.stringify({
                     type: 'message',
-                    msg: 'goddammit'
+                    msg: 'hello world!'
                 })
             )
         }
@@ -26,6 +27,7 @@ function App() {
         <BrowserRouter>
             <>
                 <Route path='/editor/:id' component={Main}/>
+                <Route path='/home' component={Home}/>
             </>
         </BrowserRouter>
     );

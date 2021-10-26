@@ -1,21 +1,12 @@
-import React, {useEffect, useState} from "react";
 import Block from "./block";
-import {load} from "./api-service";
 
-export default function ContentArea(id, isAddVersionDialogHidden, setAddVersionDialogHidden) {
-
-    const [state, setState] = useState([])
-
-    useEffect(() => {
-        load(id).then(data => {
-            setState(data.blocks)
-        })
-    }, [id])
+export default function ContentArea(state, setBlockId, isAddVersionDialogHidden, setAddVersionDialogHidden) {
 
     return(
         <div id="content-area">
             {
                 state.map(b => <Block
+                    setBlockId={setBlockId}
                     isAddVersionDialogHidden={isAddVersionDialogHidden}
                     setAddVersionDialogHidden={setAddVersionDialogHidden}
                     b={b}
@@ -23,6 +14,7 @@ export default function ContentArea(id, isAddVersionDialogHidden, setAddVersionD
             }
         </div>
     )
+
 }
 
 

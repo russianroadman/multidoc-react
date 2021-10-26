@@ -7,7 +7,6 @@ export const post = (url, body) => {
 		"headers": {"Content-Type": "application/json"},
 		"data": JSON.stringify(body),
 	};
-	//$.ajax(settings).done(response => callback(response));
 	return $.ajax(settings)
 };
 

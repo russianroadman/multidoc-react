@@ -1,13 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
+import {createVersion} from "../Api/api-service";
 
-export default function AddVersion(isAddVersionDialogHidden, setAddVersionDialogHidden){
+export default function AddVersionDialog(blockId, isAddVersionDialogHidden, setAddVersionDialogHidden){
+
+    const [versionTitle, setVersionTitle] = useState('')
 
     const close = () => {
         setAddVersionDialogHidden(true)
     }
 
+    const updateVersionTitle = (value) => {
+        setVersionTitle(value)
+    }
+
     const addVersion = () => {
-        //todo
+        createVersion(blockId, versionTitle)
         close()
     }
 
@@ -19,7 +26,9 @@ export default function AddVersion(isAddVersionDialogHidden, setAddVersionDialog
                     X
                 </button>
             </div>
-            <input placeholder="Author name" className="add-version-input" />
+            <input placeholder="Author name" className="add-version-input"
+                   value={versionTitle}
+                   onChange={e => updateVersionTitle(e.target.value)}/>
             <button
                 className="add-version-button"
                 onClick={addVersion}

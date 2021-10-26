@@ -2,7 +2,7 @@ import SidebarFind from "./sidebar-find";
 import SidebarActions from "./sidebar-actions";
 import SidebarHistory from "./sidebar-history";
 import React, {useState} from "react";
-import {history} from "./history";
+import {history} from "../Util/history";
 
 export default function Sidebar(toggled, isShareDialogHidden, setShareDialogHidden){
 

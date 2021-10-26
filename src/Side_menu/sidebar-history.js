@@ -1,5 +1,5 @@
 import React from "react";
-import './editor.css'
+import '../css/editor.css'
 
 export default function SidebarHistory(historyList){
 

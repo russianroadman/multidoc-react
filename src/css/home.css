@@ -1,0 +1,26 @@
+
+.home-option-list{
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+}
+
+.home-option-list-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.home-option-list-button{
+    border-radius: 0.25rem;
+}
+
+.home-use-example{
+    color: white;
+    background: mediumpurple;
+}

@@ -1,18 +1,19 @@
 import React, {useState} from "react";
-import './editor.css'
-import Sidebar from "./sidebar";
+import '../css/editor.css'
+import Sidebar from "../Side_menu/sidebar";
+import {saveDocumentTitle} from "../Api/api-service";
 
-export default function Top(documentTitle, isShareDialogHidden, setShareDialogHidden){
+export default function Top({documentId, documentTitle, setDocumentTitle, isShareDialogHidden, setShareDialogHidden}){
 
     const [toggled, setToggled] = useState(false);
-    const [docTitle, setDocTitle] = useState(documentTitle);
 
     const toggleMenu = () => {
         setToggled(!toggled)
     }
 
-    const updateDTitle = (value) => {
-        setDocTitle(value)
+    const updateDocumentTitle = (value) => {
+        setDocumentTitle(value)
+        saveDocumentTitle(documentId, value)
     }
 
     return(
@@ -26,8 +27,8 @@ export default function Top(documentTitle, isShareDialogHidden, setShareDialogHi
                 <input placeholder="Document title"
                        type="text"
                        className="doc-title redactor-shadow-element"
-                       value={docTitle}
-                       onChange={e => updateDTitle(e.target.value)}/>
+                       value={documentTitle}
+                       onChange={e => updateDocumentTitle(e.target.value)}/>
             </div>
             {Sidebar(toggled, isShareDialogHidden, setShareDialogHidden)}
         </>

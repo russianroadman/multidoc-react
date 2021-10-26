@@ -1,25 +1,20 @@
-import React, {useState} from "react";
-import './editor.css'
-import {copyToClipboard} from "./clipboard";
+import '../css/editor.css'
+import {copyToClipboard} from "../Util/clipboard";
 
 export default function SidebarActions(isShareDialogHidden, setShareDialogHidden){
-
-    const [value, setValue] = useState('http://localhost:3000/');
 
     const hideCopyMessage = () => {
         setShareDialogHidden(true);
     }
 
     const share = () => {
-        copyToClipboard(value)
+        copyToClipboard(window.location)
         setShareDialogHidden(false)
         setTimeout(hideCopyMessage, 2000)
     }
 
     const print = () => {
-        
         window.print()
-
     }
 
     return(

@@ -1,8 +1,9 @@
 import React, {useState} from "react";
-import './editor.css'
+import '../css/editor.css'
 import Ck from "./ck";
+import {saveBlockTitle, saveVersionTitle} from "../Api/api-service";
 
-export default function Block({ isAddVersionDialogHidden, setAddVersionDialogHidden, b }){
+export default function Block({setBlockId, isAddVersionDialogHidden, setAddVersionDialogHidden, b }){
 
     const [blockTitle, setBlockTitle] = useState(b.title)
     const [versionTitle, setVersionTitle] = useState(b.versions[0].title)
@@ -11,38 +12,47 @@ export default function Block({ isAddVersionDialogHidden, setAddVersionDialogHid
     const [content, setContent] = useState(b.versions[0].content.content)
     const [isPreferred, setPreferred] = useState(b.versions[0].preferred)
 
+    const [contentId, setContentId] = useState(b.versions[0].content.id)
+    const [versionId, setVersionId] = useState(b.versions[0].id)
+
     const goRight = () => {
         if (page < pages) {
             const t = b.versions[page];
-            switchBlockContent(t.title, page+1, t.content.content, t.preferred)
+            switchBlockContent(t.id, t.title, page+1, t.content.id, t.content.content, t.preferred)
         }
     }
 
     const goLeft = () => {
         if (page > 1) {
             const t = b.versions[page-2];
-            switchBlockContent(t.title, page-1, t.content.content, t.preferred)
+            switchBlockContent(t.id, t.title, page-1, t.content.id, t.content.content, t.preferred)
         }
     }
 
-    const switchBlockContent = (versionTitle_, page_, content_, isPreferred_) => {
+    const switchBlockContent = (versionId_, versionTitle_, page_, contentId_, content_, isPreferred_) => {
+        setVersionId(versionId_)
         setVersionTitle(versionTitle_)
         setPage(page_)
+        setContentId(contentId_)
         setContent(content_)
         setPreferred(isPreferred_)
     }
 
     const showNewVersion = () => {
-        console.log('hi herbert')
-        if (isAddVersionDialogHidden) setAddVersionDialogHidden(false);
+        if (isAddVersionDialogHidden){
+            setAddVersionDialogHidden(false);
+            setBlockId(b.id)
+        }
     }
 
     const updateVTitle = (value) => {
         setVersionTitle(value)
+        saveVersionTitle(versionId, value)
     }
 
     const updateBTitle = (value) => {
         setBlockTitle(value)
+        saveBlockTitle(b.id, value)
     }
 
     return(
@@ -52,7 +62,7 @@ export default function Block({ isAddVersionDialogHidden, setAddVersionDialogHid
                    placeholder="Created by..."
                    value={versionTitle}
                    onChange={e => updateVTitle(e.target.value)}/>
-            <Ck content={content} />
+            <Ck contentId={contentId} content={content} setContent={setContent} />
             <div className="b-bottom">
                 <input className="b-label"
                        placeholder="Block title"
