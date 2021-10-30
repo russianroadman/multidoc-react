@@ -24,7 +24,7 @@ export default function AddBlockDialog(documentId, isAddBlockDialogHidden, setAd
     }
 
     return(
-        <div className={isAddBlockDialogHidden ? "add-block add-block-hidden redactor-shadow-element" : "add-block redactor-shadow-element"}>
+        <div className={isAddBlockDialogHidden ? "add-block hidden redactor-shadow-element" : "add-block redactor-shadow-element"}>
             <div className="add-block-label">
                 Create new block
                 <button onClick={close} className="add-block-close">

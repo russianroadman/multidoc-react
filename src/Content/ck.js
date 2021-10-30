@@ -5,8 +5,6 @@ import {saveContent} from "../Api/api-service";
 
 export default function Ck({contentId, content, setContent}){
 
-    console.log(content)
-
     return(
         <CKEditor
             editor={ BalloonEditor }

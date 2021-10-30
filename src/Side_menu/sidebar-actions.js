@@ -1,7 +1,8 @@
 import '../css/editor.css'
 import {copyToClipboard} from "../Util/clipboard";
+import {getPreferredList} from "../Api/api-service";
 
-export default function SidebarActions(isShareDialogHidden, setShareDialogHidden){
+export default function SidebarActions(setPrint, documentId, isShareDialogHidden, setShareDialogHidden, setDeleteDocumentDialogHidden){
 
     const hideCopyMessage = () => {
         setShareDialogHidden(true);
@@ -14,7 +15,17 @@ export default function SidebarActions(isShareDialogHidden, setShareDialogHidden
     }
 
     const print = () => {
+        getPreferredList(documentId)
+            .then(contents => {
+                let result = ''
+                contents.forEach(c => result += c+'\n\n')
+                setPrint(result)
+            })
         window.print()
+    }
+
+    const del = () => {
+        setDeleteDocumentDialogHidden(false)
     }
 
     return(
@@ -25,7 +36,7 @@ export default function SidebarActions(isShareDialogHidden, setShareDialogHidden
             <button className="side-menu-option-export" onClick={print}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="darkgray" width="24" height="24" viewBox="0 0 24 24"><path d="M16 11h5l-9 10-9-10h5v-11h8v11zm1 11h-10v2h10v-2z"/></svg>
             </button>
-            <button className="side-menu-option-delete">
+            <button className="side-menu-option-delete" onClick={del}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="darkgray" width="24" height="24" viewBox="0 0 24 24"><path d="M3 6v18h18v-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.315c0 .901.731 2 1.631 2h5.712z"/></svg>
             </button>
         </div>

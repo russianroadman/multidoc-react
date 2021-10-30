@@ -8,18 +8,16 @@ export const load = (id) => {
 	})
 }
 
-export const forceLoad = (id) => {
-	return post(baseurl+'/update',{
-		documentId: id
-	})
-}
-
 export const create = (documentTitle, blockTitle, versionTitle) => {
-	return post(baseurl+'/update',{
+	return post(baseurl+'/create',{
 		documentTitle: documentTitle,
 		blockTitle: blockTitle,
 		versionTitle: versionTitle
 	})
+}
+
+export const createExample = () => {
+	return post(baseurl+'/create-example')
 }
 
 export const deleteDocument = (id) => {
@@ -96,5 +94,11 @@ export const saveContent = (contentId, content) => {
 	return post(baseurl+'/save-content',{
 		contentId: contentId,
 		content: content
+	})
+}
+
+export const getPreferredList = (documentId) => {
+	return post(baseurl+'/get-preferred-list',{
+		documentId: documentId
 	})
 }

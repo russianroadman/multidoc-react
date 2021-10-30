@@ -1,9 +1,13 @@
 import React, {useState} from "react";
 import '../css/editor.css'
 import Ck from "./ck";
-import {saveBlockTitle, saveVersionTitle} from "../Api/api-service";
+import {
+    saveBlockTitle,
+    saveVersionTitle,
+    setPreferred as _setPreferred
+} from "../Api/api-service";
 
-export default function Block({setBlockId, isAddVersionDialogHidden, setAddVersionDialogHidden, b }){
+export default function Block({setBlockId, setDeleteBlockTitle, setDeleteVersionId, setDeleteVersionTitle, setDeleteVersionDialogHidden, setDeleteBlockDialogHidden, isAddVersionDialogHidden, setAddVersionDialogHidden, b }){
 
     const [blockTitle, setBlockTitle] = useState(b.title)
     const [versionTitle, setVersionTitle] = useState(b.versions[0].title)
@@ -45,6 +49,22 @@ export default function Block({setBlockId, isAddVersionDialogHidden, setAddVersi
         }
     }
 
+    const starVersion = () => {
+        _setPreferred(versionId)
+    }
+
+    const deleteVersion = () => {
+        setDeleteVersionId(versionId)
+        setDeleteVersionTitle(versionTitle)
+        setDeleteVersionDialogHidden(false)
+    }
+
+    const deleteBlock = () => {
+        setBlockId(b.id)
+        setDeleteBlockTitle(b.title)
+        setDeleteBlockDialogHidden(false)
+    }
+
     const updateVTitle = (value) => {
         setVersionTitle(value)
         saveVersionTitle(versionId, value)
@@ -61,6 +81,7 @@ export default function Block({setBlockId, isAddVersionDialogHidden, setAddVersi
             <input className="v-label"
                    placeholder="Created by..."
                    value={versionTitle}
+                   // value={versionId}
                    onChange={e => updateVTitle(e.target.value)}/>
             <Ck contentId={contentId} content={content} setContent={setContent} />
             <div className="b-bottom">
@@ -93,9 +114,9 @@ export default function Block({setBlockId, isAddVersionDialogHidden, setAddVersi
                     </button>
                     <div className="b-dropdown-menu redactor-shadow-element">
                         <button onMouseDown={showNewVersion} className="b-dropdown-menu-option">Add version</button>
-                        <button className="b-dropdown-menu-option">Star version</button>
-                        <button className="b-dropdown-menu-option">Delete version</button>
-                        <button className="b-dropdown-menu-option">Delete block</button>
+                        <button onMouseDown={starVersion} className="b-dropdown-menu-option">Star version</button>
+                        <button onMouseDown={deleteVersion} className="b-dropdown-menu-option">Delete version</button>
+                        <button onMouseDown={deleteBlock} className="b-dropdown-menu-option">Delete block</button>
                     </div>
                 </div>
             </div>

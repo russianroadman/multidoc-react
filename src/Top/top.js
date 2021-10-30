@@ -3,7 +3,17 @@ import '../css/editor.css'
 import Sidebar from "../Side_menu/sidebar";
 import {saveDocumentTitle} from "../Api/api-service";
 
-export default function Top({documentId, documentTitle, setDocumentTitle, isShareDialogHidden, setShareDialogHidden}){
+export default function Top(
+    {
+        setPrint,
+        documentId,
+        documentTitle,
+        setDocumentTitle,
+        isShareDialogHidden,
+        setShareDialogHidden,
+        setDeleteDocumentDialogHidden
+    }
+){
 
     const [toggled, setToggled] = useState(false);
 
@@ -30,7 +40,7 @@ export default function Top({documentId, documentTitle, setDocumentTitle, isShar
                        value={documentTitle}
                        onChange={e => updateDocumentTitle(e.target.value)}/>
             </div>
-            {Sidebar(toggled, isShareDialogHidden, setShareDialogHidden)}
+            {Sidebar(setPrint, documentId, toggled, isShareDialogHidden, setShareDialogHidden, setDeleteDocumentDialogHidden)}
         </>
     )
 }

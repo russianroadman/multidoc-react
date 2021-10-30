@@ -5,11 +5,17 @@ export default function SidebarHistory(historyList){
 
     let options = [];
 
-    historyList.forEach(el => options.push(
-        <button className="side-menu-option redactor-shadow-element">
-            {el}
-        </button>
-    ))
+    const goTo = (id) => {
+        window.location = window.location.origin + '/editor/' + id
+    }
+
+    historyList.forEach((value, key) => {
+        options.push(
+            <button onClick={() => goTo(key)} className="side-menu-option redactor-shadow-element">
+                {value}
+            </button>
+        )
+    })
 
     return(
         <div className="side-menu-option-list-history">

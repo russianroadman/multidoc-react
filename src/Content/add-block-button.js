@@ -1,8 +1,10 @@
 import React from "react";
+import {test} from "../Api/websocket-service";
 
 export default function AddBlockButton(isAddBlockDialogHidden, setAddBlockDialogHidden){
 
     const showNewBlock = () => {
+        test()
         if (isAddBlockDialogHidden) setAddBlockDialogHidden(false);
     }
 

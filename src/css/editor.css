@@ -10,17 +10,29 @@
     .copy-to-clipboard-message-active,
     .b-bottom,
     .b-fav,
-    .v-label
+    .v-label,
+    .content-area
     {
         display: none !important;
     }
 
+    .print-ck{
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
     .redactor-shadow-element {
-        -webkit-box-shadow: none !important;;
-        -moz-box-shadow: none !important;;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
         box-shadow: none !important;
     }
 
+}
+
+.print-ck{
+    display: none;
 }
 
 * {
@@ -29,10 +41,17 @@
     font-family: Arial, sans-serif;
 }
 
+li { display: list-item !important; }
+
 .ck{
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
+}
+
+.ck-content{
+    padding: 1rem 2rem !important;
+    padding-bottom: 0.5rem !important;
 }
 
 .ck-focused{
@@ -148,8 +167,8 @@ body {
     height: 30vh;
 }
 
-.add-block-hidden, .add-version-hidden{
-    display: none;
+.hidden{
+    display: none !important;
 }
 
 .add-block-label, .add-block-input, .add-block-button, .add-version-label, .add-version-input, .add-version-button{
@@ -554,4 +573,63 @@ body {
 
 .copy-to-clipboard-message-active{
     transform: translateY(0%);
+}
+
+.modal-yes-no{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    top: 30vh;
+    z-index: 100;
+}
+
+.model-yes-no-message{
+    padding: 1rem;
+}
+
+.model-yes-no-options{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.model-yes-no-option{
+    margin: 0 1rem 1rem 1rem;
+    padding: 0.5rem;
+    width: 50%;
+    border: 1px solid white;
+    /*color: white;*/
+}
+
+.model-yes-no-option:hover {
+    border: 1px solid lightgray;
+}
+
+.model-yes-no-option.yes:hover.redactor-shadow-element{
+
+    -webkit-box-shadow: 0 0 0.5rem 0 #ffc8c8;
+    -moz-box-shadow: 0 0 0.5rem 0 #ffc8c8;
+    box-shadow: 0 0 0.5rem 0 #ffc8c8;
+
+}
+
+.model-yes-no-option.yes:hover{
+
+    border: 1px solid #ffc8c8;
+
+}
+
+.model-yes-no-option.yes{
+    margin-right: 0.5rem;
+    /*background: #26de81;*/
+}
+
+.model-yes-no-option.no{
+    margin-left: 0.5rem;
+    /*background: palevioletred;*/
 }

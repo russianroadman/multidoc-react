@@ -1,0 +1,58 @@
+.menu-wrapper{
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menu-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 0.25rem;
+    color: white;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+    margin: 0.25rem;
+}
+
+.menu-item-main{
+    width: 100%;
+    font-weight: 900;
+    font-size: 2rem;
+    color: mediumpurple;
+    margin: 0.25rem;
+    padding: 0;
+}
+
+.purple{
+    background: mediumpurple;
+}
+
+.green{
+    background: #26de81;
+}
+
+.no-padding{
+    padding: 0;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.menu-item-icon{
+    height: 25%;
+    padding: 0;
+    background: none;
+}
+
+.menu-item-input{
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+}

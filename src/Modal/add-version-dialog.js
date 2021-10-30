@@ -19,7 +19,11 @@ export default function AddVersionDialog(blockId, isAddVersionDialogHidden, setA
     }
 
     return(
-        <div className={isAddVersionDialogHidden ? "add-version add-version-hidden redactor-shadow-element" : "add-version redactor-shadow-element"}>
+        <div className={
+            isAddVersionDialogHidden
+                ? "add-version hidden redactor-shadow-element"
+                : "add-version redactor-shadow-element"
+        }>
             <div className="add-version-label">
                 Create new version
                 <button onClick={close} className="add-version-close">

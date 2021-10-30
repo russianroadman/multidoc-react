@@ -4,7 +4,11 @@ export default function SidebarFind(history, historyList, setHistoryList){
 
     const search = (e) => {
         let v = e.target.value
-        let newList = history.filter(item => item.toUpperCase().includes(v.toUpperCase()) || v === '')
+        // let newList = history.filter(item => item.value.toUpperCase().includes(v.toUpperCase()) || v === '')
+        let newList = new Map(
+            [...history]
+                .filter(([k, val]) => val.toUpperCase().includes(v.toUpperCase()) || v === '')
+        )
         setHistoryList(newList)
     }
 
