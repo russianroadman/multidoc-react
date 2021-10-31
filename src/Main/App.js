@@ -3,18 +3,11 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Editor from './Editor';
 import Home from './Home'
 import { w3cwebsocket as Ws } from 'websocket'
-import {useEffect} from "react";
 import NoSuchPage from "./NoSuchPage";
 
 export const client = new Ws('ws://localhost:8080')
 
 function App() {
-
-    useEffect(() => {
-        client.onopen = () => {
-            console.log('client connected')
-        }
-    })
 
     return (
         <>

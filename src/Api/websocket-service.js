@@ -1,14 +1,15 @@
 import {client} from "../Main/App";
 
-export const test = () => {
-
-	console.log(client.readyState === WebSocket.OPEN)
+export const test = (id) => {
 
 	if (client.readyState === WebSocket.OPEN){
 		client.send(
 			JSON.stringify({
 				type: 'message',
-				msg: 'hello world!'
+				msg: {
+					type: 'message',
+					payload: 'hello'
+				}
 			})
 		)
 		console.log('sent')

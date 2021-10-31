@@ -11,6 +11,7 @@ import {addDocumentToHistory} from "../Util/history";
 import DeleteDocumentDialog from "../Modal/delete-document-dialog";
 import DeleteBlockDialog from "../Modal/delete-block-dialog";
 import DeleteVersionDialog from "../Modal/delete-version-dialog";
+import {client} from "./App";
 
 export default function Editor(){
 
@@ -31,7 +32,28 @@ export default function Editor(){
 
 	const { id } = useParams()
 
+	const connection = (id) => {
+		console.log('client about to connect...')
+		client.onopen = () => {
+			console.log('client connected')
+			if (client.readyState === WebSocket.OPEN){
+				client.send(
+					JSON.stringify({
+						type: 'message',
+						msg: {
+							type: 'connection',
+							payload: id
+						}
+					})
+				)
+				console.log('sent')
+			}
+		}
+	}
+
 	useEffect(() => {
+
+		connection(id)
 
 		load(id).then(data => {
 			if (data.id !== undefined){
@@ -63,7 +85,7 @@ export default function Editor(){
 			{DeleteBlockDialog(blockId, blockTitle, isDeleteBlockDialogHidden, setDeleteBlockDialogHidden)}
 			{DeleteVersionDialog(versionId, versionTitle, isDeleteVersionDialogHidden, setDeleteVersionDialogHidden)}
 			{ContentArea(print, blocks, setBlockId, setBlockTitle, setVersionId, setVersionTitle, setDeleteBlockDialogHidden, setDeleteVersionDialogHidden, isAddVersionDialogHidden, setAddVersionDialogHidden)}
-			{AddBlockButton(isAddBlockDialogHidden, setAddBlockDialogHidden)}
+			{AddBlockButton(documentId, isAddBlockDialogHidden, setAddBlockDialogHidden)}
 		</div>
 	)
 
