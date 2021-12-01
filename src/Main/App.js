@@ -1,5 +1,5 @@
 import '../css/editor.css'
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import Editor from './Editor';
 import Home from './Home'
 import { w3cwebsocket as Ws } from 'websocket'
@@ -18,6 +18,9 @@ function App() {
                 <Switch>
                     <Route exact path='/editor/:id' component={Editor}/>
                     <Route exact path='/home' component={Home}/>
+                    <Route exact path='/'>
+                        <Redirect to={'/home'} />
+                    </Route>
                     <Route component={NoSuchPage} />
                 </Switch>
             </BrowserRouter>

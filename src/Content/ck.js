@@ -3,7 +3,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import {saveContent} from "../Api/api-service";
 
-export default function Ck({contentId, content, setContent}){
+export default function Ck({contentId, content, updateContent}){
 
     return(
         <CKEditor
@@ -48,7 +48,8 @@ export default function Ck({contentId, content, setContent}){
 
             } }
             onChange={ ( event, editor ) => {
-                setContent(editor.getData())
+                // setContent(editor.getData())
+                updateContent(contentId, editor.getData())
                 saveContent(contentId, editor.getData())
             } }
             onBlur={ ( event, editor ) => {

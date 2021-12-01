@@ -7,13 +7,37 @@ import {
     setPreferred as _setPreferred
 } from "../Api/api-service";
 
-export default function Block({setBlockId, setDeleteBlockTitle, setDeleteVersionId, setDeleteVersionTitle, setDeleteVersionDialogHidden, setDeleteBlockDialogHidden, isAddVersionDialogHidden, setAddVersionDialogHidden, b }){
+export default function Block({
+                    setBlockId,
+                    setDeleteBlockTitle,
+                    setDeleteVersionId,
+                    setDeleteVersionTitle,
+                    setDeleteVersionDialogHidden,
+                    setDeleteBlockDialogHidden,
+                    isAddVersionDialogHidden,
+                    setAddVersionDialogHidden,
 
-    const [blockTitle, setBlockTitle] = useState(b.title)
-    const [versionTitle, setVersionTitle] = useState(b.versions[0].title)
+                    // blockTitle,
+                    // setBlockTitle,
+                    // versionTitle,
+                    // setVersionTitle,
+                    // content,
+                    // setContent,
+
+                    updateBlockTitle,
+                    updateVersionTitle,
+                    updateContent,
+
+                    b
+                }){
+
+    // const [blockTitle, setBlockTitle] = useState(b.title)
+
+
+    // const [versionTitle, setVersionTitle] = useState(b.versions[0].title)
     const [pages, setPages] = useState(b.versions.length)
     const [page, setPage] = useState(1)
-    const [content, setContent] = useState(b.versions[0].content.content)
+    // const [content, setContent] = useState(b.versions[0].content.content)
     const [isPreferred, setPreferred] = useState(b.versions[0].preferred)
 
     const [contentId, setContentId] = useState(b.versions[0].content.id)
@@ -35,10 +59,10 @@ export default function Block({setBlockId, setDeleteBlockTitle, setDeleteVersion
 
     const switchBlockContent = (versionId_, versionTitle_, page_, contentId_, content_, isPreferred_) => {
         setVersionId(versionId_)
-        setVersionTitle(versionTitle_)
+        // setVersionTitle(versionTitle_)
         setPage(page_)
         setContentId(contentId_)
-        setContent(content_)
+        // setContent(content_)
         setPreferred(isPreferred_)
     }
 
@@ -55,7 +79,7 @@ export default function Block({setBlockId, setDeleteBlockTitle, setDeleteVersion
 
     const deleteVersion = () => {
         setDeleteVersionId(versionId)
-        setDeleteVersionTitle(versionTitle)
+        // setDeleteVersionTitle(versionTitle)
         setDeleteVersionDialogHidden(false)
     }
 
@@ -66,12 +90,14 @@ export default function Block({setBlockId, setDeleteBlockTitle, setDeleteVersion
     }
 
     const updateVTitle = (value) => {
-        setVersionTitle(value)
+        // setVersionTitle(value)
+        updateVersionTitle(versionId, value)
         saveVersionTitle(versionId, value)
     }
 
     const updateBTitle = (value) => {
-        setBlockTitle(value)
+        // setBlockTitle(value)
+        updateBlockTitle(b.id, value)
         saveBlockTitle(b.id, value)
     }
 
@@ -80,14 +106,20 @@ export default function Block({setBlockId, setDeleteBlockTitle, setDeleteVersion
             <div className={ isPreferred ? "b-fav b-fav-starred" : "b-fav" } />
             <input className="v-label"
                    placeholder="Created by..."
-                   value={versionTitle}
+                   value={b.versions.find(v => v.id === versionId).title}
                    // value={versionId}
                    onChange={e => updateVTitle(e.target.value)}/>
-            <Ck contentId={contentId} content={content} setContent={setContent} />
+            {/*<Ck key={contentId} contentId={contentId} content={content} setContent={setContent} />*/}
+            <Ck
+                key={contentId}
+                contentId={contentId}
+                content={b.versions.find(v => v.id === versionId).content.content}
+                updateContent={updateContent}
+            />
             <div className="b-bottom">
                 <input className="b-label"
                        placeholder="Block title"
-                       value={blockTitle}
+                       value={b.title}
                        onChange={e => updateBTitle(e.target.value)}/>
                 <div className="v-arrows">
                     <button onClick={goLeft} className="v-left">

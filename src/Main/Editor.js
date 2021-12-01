@@ -12,6 +12,7 @@ import DeleteDocumentDialog from "../Modal/delete-document-dialog";
 import DeleteBlockDialog from "../Modal/delete-block-dialog";
 import DeleteVersionDialog from "../Modal/delete-version-dialog";
 import {client} from "./App";
+import {applyResult, setId, setSetBlocks} from "../Api/websocket-service";
 
 export default function Editor(){
 
@@ -42,18 +43,25 @@ export default function Editor(){
 						type: 'message',
 						msg: {
 							type: 'connection',
-							payload: id
+							payload: {
+								documentId : id
+							}
 						}
 					})
 				)
-				console.log('sent')
 			}
+		}
+		client.onmessage = (m) => {
+			let result = JSON.parse(m.data)
+			applyResult(result, setDocumentTitle, blocks)
 		}
 	}
 
 	useEffect(() => {
 
 		connection(id)
+		setId(id)
+		setSetBlocks(blocks, setBlocks)
 
 		load(id).then(data => {
 			if (data.id !== undefined){
@@ -84,7 +92,19 @@ export default function Editor(){
 			{DeleteDocumentDialog(documentId, isDeleteDocumentDialogHidden, setDeleteDocumentDialogHidden)}
 			{DeleteBlockDialog(blockId, blockTitle, isDeleteBlockDialogHidden, setDeleteBlockDialogHidden)}
 			{DeleteVersionDialog(versionId, versionTitle, isDeleteVersionDialogHidden, setDeleteVersionDialogHidden)}
-			{ContentArea(print, blocks, setBlockId, setBlockTitle, setVersionId, setVersionTitle, setDeleteBlockDialogHidden, setDeleteVersionDialogHidden, isAddVersionDialogHidden, setAddVersionDialogHidden)}
+			<ContentArea
+				print={print}
+				blocks={blocks}
+				setBlocks={setBlocks}
+				setBlockId={setBlockId}
+				setBlockTitle={setBlockTitle}
+				setVersionId={setVersionId}
+				setVersionTitle={setVersionTitle}
+				setDeleteBlockDialogHidden={setDeleteBlockDialogHidden}
+				setDeleteVersionDialogHidden={setDeleteVersionDialogHidden}
+				isAddVersionDialogHidden={isAddVersionDialogHidden}
+				setAddVersionDialogHidden={setAddVersionDialogHidden}
+			/>
 			{AddBlockButton(documentId, isAddBlockDialogHidden, setAddBlockDialogHidden)}
 		</div>
 	)
