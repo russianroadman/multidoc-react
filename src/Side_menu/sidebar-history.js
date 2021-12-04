@@ -11,7 +11,7 @@ export default function SidebarHistory(historyList){
 
     historyList.forEach((value, key) => {
         options.push(
-            <button onClick={() => goTo(key)} className="side-menu-option redactor-shadow-element">
+            <button key={value+key} onClick={() => goTo(key)} className="side-menu-option redactor-shadow-element">
                 {value}
             </button>
         )

@@ -17,9 +17,11 @@ export default function Block({
                     isAddVersionDialogHidden,
                     setAddVersionDialogHidden,
 
-                    updateBlockTitle,
-                    updateVersionTitle,
-                    updateContent,
+                    // updateBlockTitle,
+                    // updateVersionTitle,
+                    // updateContent,
+
+                    setIsEditing,
 
                     b
                 }){
@@ -65,12 +67,10 @@ export default function Block({
 
     const updateVTitle = (value) => {
         let versionId = b.versions[page].id
-        updateVersionTitle(versionId, value)
         saveVersionTitle(versionId, value)
     }
 
     const updateBTitle = (value) => {
-        updateBlockTitle(b.id, value)
         saveBlockTitle(b.id, value)
     }
 
@@ -117,7 +117,7 @@ export default function Block({
                 key={ getSelectedContentId() }
                 contentId={ getSelectedContentId() }
                 content={ getSelectedContent() }
-                updateContent={updateContent}
+                setIsEditing={setIsEditing}
             />
             <div className="b-bottom">
                 <input className="b-label"

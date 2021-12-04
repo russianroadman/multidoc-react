@@ -12,7 +12,7 @@ function App() {
     return (
         <>
             {window.onafterprint = () => {
-                window.location = window.location
+                window.location.reload()
             }}
             <BrowserRouter>
                 <Switch>

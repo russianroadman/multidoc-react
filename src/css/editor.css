@@ -633,3 +633,9 @@ body {
     margin-left: 0.5rem;
     /*background: palevioletred;*/
 }
+
+.ck-being-edited {
+    position: fixed;
+    height: 90%;
+    width: 50%;
+}

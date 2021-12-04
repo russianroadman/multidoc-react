@@ -12,7 +12,7 @@ import DeleteDocumentDialog from "../Modal/delete-document-dialog";
 import DeleteBlockDialog from "../Modal/delete-block-dialog";
 import DeleteVersionDialog from "../Modal/delete-version-dialog";
 import {client} from "./App";
-import {applyResult, setId, setSetBlocks} from "../Api/websocket-service";
+import {setId} from "../Api/websocket-service";
 
 export default function Editor(){
 
@@ -30,51 +30,44 @@ export default function Editor(){
 	const [blockTitle, setBlockTitle] = useState('')
 	const [versionTitle, setVersionTitle] = useState('')
 	const [print, setPrint] = useState('')
+	const [isEditing, setIsEditing] = useState(false)
 
 	const { id } = useParams()
 
-	const connection = (id) => {
-		console.log('client about to connect...')
-		client.onopen = () => {
-			console.log('client connected')
-			if (client.readyState === WebSocket.OPEN){
-				client.send(
-					JSON.stringify({
-						type: 'message',
-						msg: {
-							type: 'connection',
-							payload: {
-								documentId : id
+	useEffect(() => {
+
+		const connection = (id) => {
+			client.onopen = () => {
+				if (client.readyState === WebSocket.OPEN){
+					console.log('client connected')
+					client.send(
+						JSON.stringify({
+							type: 'message',
+							msg: {
+								type: 'connection',
+								payload: {
+									documentId : id
+								}
 							}
+						})
+					)
+				}
+			}
+			client.onmessage = () => {
+				if (!isEditing){
+					load(id).then(data => {
+						if (data.id !== undefined){
+							setBlocks(data.blocks)
+						} else {
+							window.location = window.location.origin + '/404'
 						}
 					})
-				)
+				}
 			}
 		}
-		client.onmessage = (m) => {
-			let result = JSON.parse(m.data)
-			// applyResult(result, setDocumentTitle, blocks)
-			console.log('action:', result.payload.action)
-			/** kek */
-			load(id).then(data => {
-				console.log('trying to reload document', id)
-				if (data.id !== undefined){
-					console.log('reloading')
-					setBlocks(data.blocks)
-				} else {
-					console.log('reload failed')
-					window.location = window.location.origin + '/404'
-				}
-			})
-			/** kek */
-		}
-	}
-
-	useEffect(() => {
 
 		connection(id)
 		setId(id)
-		setSetBlocks(blocks, setBlocks)
 
 		load(id).then(data => {
 			if (data.id !== undefined){
@@ -86,7 +79,8 @@ export default function Editor(){
 				window.location = window.location.origin + '/404'
 			}
 		})
-	}, [id])
+
+	}, [id, isEditing])
 
 	return(
 		<div className="App">
@@ -108,7 +102,6 @@ export default function Editor(){
 			<ContentArea
 				print={print}
 				blocks={blocks}
-				setBlocks={setBlocks}
 				setBlockId={setBlockId}
 				setBlockTitle={setBlockTitle}
 				setVersionId={setVersionId}
@@ -117,6 +110,7 @@ export default function Editor(){
 				setDeleteVersionDialogHidden={setDeleteVersionDialogHidden}
 				isAddVersionDialogHidden={isAddVersionDialogHidden}
 				setAddVersionDialogHidden={setAddVersionDialogHidden}
+				setIsEditing={setIsEditing}
 			/>
 			{AddBlockButton(documentId, isAddBlockDialogHidden, setAddBlockDialogHidden)}
 		</div>
