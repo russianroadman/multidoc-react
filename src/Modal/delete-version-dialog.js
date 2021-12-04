@@ -5,6 +5,7 @@ export default function DeleteVersionDialog(versionId, versionTitle, isDeleteVer
 
 	const del = () => {
 		deleteVersion(versionId)
+		hide()
 	}
 
 	const hide = () => {

@@ -78,6 +78,27 @@ const updateContent = (id, newContent) => {
 
 }
 
+const updateBlocksCreated = (blockTitle, versionTitle) => {
+
+}
+
+const updateBlocksDeleted = (blockId) => {
+
+}
+
+const updateBlocksVersionCreated = (blockId, versionTitle) => {
+
+}
+
+const updateBlocksVersionDeleted = (versionId) => {
+
+}
+
+const updateBlocksVersionSetAsPreferred = (versionId) => {
+
+}
+
+
 export const applyResult = (
 	data,
 	setDocumentTitle
@@ -98,19 +119,19 @@ export const applyResult = (
 			updateVersionTitle(payload.body.versionId, payload.body.versionTitle)
 			break
 		case action.BLOCK_CREATED:
-
+			updateBlocksCreated(payload.body.blockTitle, payload.body.versionTitle)
 			break
 		case action.BLOCK_DELETED:
-
+			updateBlocksDeleted(payload.body.blockId)
 			break
 		case action.VERSION_CREATED:
-
+			updateBlocksVersionCreated(payload.body.blockId, payload.body.versionTitle)
 			break
 		case action.VERSION_DELETED:
-
+			updateBlocksVersionDeleted(payload.body.versionId)
 			break
 		case action.VERSION_SET_AS_PREFERRED:
-
+			updateBlocksVersionSetAsPreferred(payload.body.versionId)
 			break
 		case action.CONTENT_SAVED:
 			updateContent(payload.body.contentId, payload.body.content)

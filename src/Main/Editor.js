@@ -53,7 +53,20 @@ export default function Editor(){
 		}
 		client.onmessage = (m) => {
 			let result = JSON.parse(m.data)
-			applyResult(result, setDocumentTitle, blocks)
+			// applyResult(result, setDocumentTitle, blocks)
+			console.log('action:', result.payload.action)
+			/** kek */
+			load(id).then(data => {
+				console.log('trying to reload document', id)
+				if (data.id !== undefined){
+					console.log('reloading')
+					setBlocks(data.blocks)
+				} else {
+					console.log('reload failed')
+					window.location = window.location.origin + '/404'
+				}
+			})
+			/** kek */
 		}
 	}
 

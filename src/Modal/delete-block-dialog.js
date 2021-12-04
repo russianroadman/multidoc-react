@@ -5,6 +5,7 @@ export default function DeleteBlockDialog(blockId, blockTitle, isDeleteBlockDial
 
 	const del = () => {
 		deleteBlock(blockId)
+		hide()
 	}
 
 	const hide = () => {

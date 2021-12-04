@@ -1,7 +1,5 @@
 import Block from "./block";
 import Ck from "./ck";
-import {useEffect, useState} from "react";
-import {setUpdateBlockTitle} from "../Api/websocket-service";
 
 export default function ContentArea({
                                         print,

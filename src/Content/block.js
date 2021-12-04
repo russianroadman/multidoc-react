@@ -17,13 +17,6 @@ export default function Block({
                     isAddVersionDialogHidden,
                     setAddVersionDialogHidden,
 
-                    // blockTitle,
-                    // setBlockTitle,
-                    // versionTitle,
-                    // setVersionTitle,
-                    // content,
-                    // setContent,
-
                     updateBlockTitle,
                     updateVersionTitle,
                     updateContent,
@@ -31,39 +24,18 @@ export default function Block({
                     b
                 }){
 
-    // const [blockTitle, setBlockTitle] = useState(b.title)
-
-
-    // const [versionTitle, setVersionTitle] = useState(b.versions[0].title)
-    const [pages, setPages] = useState(b.versions.length)
-    const [page, setPage] = useState(1)
-    // const [content, setContent] = useState(b.versions[0].content.content)
-    const [isPreferred, setPreferred] = useState(b.versions[0].preferred)
-
-    const [contentId, setContentId] = useState(b.versions[0].content.id)
-    const [versionId, setVersionId] = useState(b.versions[0].id)
+    const [page, setPage] = useState(0)
 
     const goRight = () => {
-        if (page < pages) {
-            const t = b.versions[page];
-            switchBlockContent(t.id, t.title, page+1, t.content.id, t.content.content, t.preferred)
+        if (page < b.versions.length-1) {
+            setPage(page+1)
         }
     }
 
     const goLeft = () => {
-        if (page > 1) {
-            const t = b.versions[page-2];
-            switchBlockContent(t.id, t.title, page-1, t.content.id, t.content.content, t.preferred)
+        if (page > 0) {
+            setPage(page-1)
         }
-    }
-
-    const switchBlockContent = (versionId_, versionTitle_, page_, contentId_, content_, isPreferred_) => {
-        setVersionId(versionId_)
-        // setVersionTitle(versionTitle_)
-        setPage(page_)
-        setContentId(contentId_)
-        // setContent(content_)
-        setPreferred(isPreferred_)
     }
 
     const showNewVersion = () => {
@@ -74,12 +46,14 @@ export default function Block({
     }
 
     const starVersion = () => {
+        let versionId = b.versions[page].id
         _setPreferred(versionId)
     }
 
     const deleteVersion = () => {
+        let versionId = b.versions[page].id
         setDeleteVersionId(versionId)
-        // setDeleteVersionTitle(versionTitle)
+        setDeleteVersionTitle(b.versions.find(v => v.id === versionId).title)
         setDeleteVersionDialogHidden(false)
     }
 
@@ -90,30 +64,59 @@ export default function Block({
     }
 
     const updateVTitle = (value) => {
-        // setVersionTitle(value)
+        let versionId = b.versions[page].id
         updateVersionTitle(versionId, value)
         saveVersionTitle(versionId, value)
     }
 
     const updateBTitle = (value) => {
-        // setBlockTitle(value)
         updateBlockTitle(b.id, value)
         saveBlockTitle(b.id, value)
     }
 
+    const isStarred = () => {
+        if ( b.versions[page] === undefined ){
+            setPage(0)
+            return false
+        }
+        return !!b.versions.find(v => v.id === b.versions[page].id).preferred;
+    }
+
+    const getVLabelValue = () => {
+        if ( b.versions[page] === undefined ){
+            setPage(0)
+            return false
+        }
+        return b.versions.find(v => v.id === b.versions[page].id ).title
+    }
+
+    const getSelectedContent = () => {
+        if ( b.versions[page] === undefined ){
+            setPage(0)
+            return false
+        }
+        return b.versions.find(v => v.id ===  b.versions[page].id ).content.content
+    }
+
+    const getSelectedContentId = () => {
+        if ( b.versions[page] === undefined ){
+            setPage(0)
+            return false
+        }
+        return b.versions.find(v => v.id ===  b.versions[page].id ).content.id
+    }
+
     return(
         <div className="b redactor-shadow-element">
-            <div className={ isPreferred ? "b-fav b-fav-starred" : "b-fav" } />
+            <div className={ isStarred() ? "b-fav b-fav-starred" : "b-fav" } />
             <input className="v-label"
                    placeholder="Created by..."
-                   value={b.versions.find(v => v.id === versionId).title}
-                   // value={versionId}
+                   value={ getVLabelValue() }
                    onChange={e => updateVTitle(e.target.value)}/>
-            {/*<Ck key={contentId} contentId={contentId} content={content} setContent={setContent} />*/}
             <Ck
-                key={contentId}
-                contentId={contentId}
-                content={b.versions.find(v => v.id === versionId).content.content}
+                key={ getSelectedContentId() }
+                contentId={ getSelectedContentId() }
+                content={ getSelectedContent() }
                 updateContent={updateContent}
             />
             <div className="b-bottom">
@@ -128,7 +131,7 @@ export default function Block({
                             <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/>
                         </svg>
                     </button>
-                    <div className="v-page">{page}/{pages}</div>
+                    <div className="v-page">{page+1}/{b.versions.length}</div>
                     <button onClick={goRight} className="v-right">
                         <svg xmlns="http://www.w3.org/2000/svg" className="btn-icon v-arrow"
                              viewBox="0 0 24 24">
