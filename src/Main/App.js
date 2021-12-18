@@ -5,7 +5,8 @@ import Home from './Home'
 import { w3cwebsocket as Ws } from 'websocket'
 import NoSuchPage from "./NoSuchPage";
 
-export const client = new Ws('ws://localhost:8080')
+// export const client = new Ws('ws://localhost:8080')
+export const client = new Ws('https://multidoc-core.herokuapp.com')
 
 function App() {
 
